@@ -1,0 +1,17 @@
+# Web Framework and Server
+fastapi>=0.109.0
+uvicorn[standard]>=0.27.0
+pydantic>=2.6.0
+pydantic-settings>=2.1.0
+
+# Database (Async)
+sqlalchemy>=2.0.25
+asyncpg>=0.29.0
+
+# Telemetry
+prometheus-fastapi-instrumentator>=7.0.0
+
+# Utilities
+python-dotenv>=1.0.0   # To load .env files for local dev
+email-validator>=2.1.0 # Required for Pydantic email validation if used
+httpx>=0.26.0          # Recommended for testing the API
