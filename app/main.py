@@ -3,6 +3,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from prometheus_fastapi_instrumentator import Instrumentator
 from sqlalchemy.sql import text
+from typing import Annotated
 import uuid
 
 from app.database import get_db, engine
@@ -21,9 +22,15 @@ app = FastAPI(
 # --- Telemetry ---
 Instrumentator().instrument(app).expose(app)
 
-# --- Auth Dependency ---
-async def verify_token(authorization: str = Header(...)):
-    """Placeholder for token validation logic"""
+# --- Auth Dependency (FIXED) ---
+async def verify_token(
+    # usage of alias="Authorization" ensures it matches your Spec and curl expectations
+    authorization: Annotated[str, Header(alias="Authorization", description="Bearer <token>")]
+):
+    """
+    Validates presence of the Authorization header.
+    In Swagger UI, you must type 'Bearer <your-token>' into the field.
+    """
     if not authorization:
         raise HTTPException(status_code=401, detail="Missing Authorization Header")
     return authorization
