@@ -21,6 +21,7 @@ app = FastAPI(
 
 # --- Telemetry ---
 Instrumentator().instrument(app).expose(app)
+Instrumentator().instrument(app).tags = ["Telemetry"]
 
 # --- Auth Dependency (FIXED) ---
 async def verify_token(
@@ -53,7 +54,7 @@ async def readiness():
 
 @app.post("/tpay/backend/transaction", 
           response_model=SessionResponse, 
-          tags=["tpay"], 
+          tags=["Transactions"], 
           operation_id="createTransaction")
 async def create_transaction(
     tx_request: TransactionRequest, 
@@ -87,7 +88,7 @@ async def create_transaction(
 
 @app.get("/tpay/backend/transaction/{transactionId}", 
          response_model=TpayDBResponse, 
-         tags=["tpay"], 
+         tags=["Transactions"], 
          operation_id="getTransaction")
 async def get_transaction(
     transactionId: str, 
@@ -120,7 +121,7 @@ async def get_transaction(
     )
 
 @app.post("/tpay/backend/token", 
-          tags=["tpay"], 
+          tags=["Transactions"], 
           operation_id="createToken")
 async def create_token(auth: str = Depends(verify_token)):
     """Simple token generation stub matching the UUID response format"""

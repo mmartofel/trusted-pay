@@ -11,9 +11,13 @@ curl -X 'POST' \
   "transactionType": "PAYMENT"
 }'
 
-echo "\n"
-
 curl -X 'GET' \
   'http://localhost:8000/tpay/backend/transaction/148b9947-aad2-4974-8827-4375e7dca844' \
   -H 'accept: application/json' \
   -H 'Authorization: Bearer test-token'
+
+curl -X 'POST' \
+  'http://localhost:8000/tpay/backend/token' \
+  -H 'accept: application/json' \
+  -H 'Authorization: Bearer test-token'
+

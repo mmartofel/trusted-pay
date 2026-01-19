@@ -9,7 +9,7 @@ paths:
   /tpay/backend/transaction:
     post:
       tags:
-        - tpay
+        - Transactions
       operationId: createTransaction
       parameters:
         - name: Authorization
@@ -33,7 +33,7 @@ paths:
   /tpay/backend/token:
     post:
       tags:
-        - tpay
+        - Transactions
       operationId: createToken
       parameters:
         - name: Authorization
@@ -52,7 +52,7 @@ paths:
   /tpay/backend/transaction/{transactionId}:
     get:
       tags:
-        - tpay
+        - Transactions
       operationId: getTransaction
       parameters:
         - name: Authorization
